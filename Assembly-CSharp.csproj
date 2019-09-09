@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\IntoManager.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/MainHardDisk/WorkProject/Unity3D/MyGameDemo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
