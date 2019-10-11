@@ -56,6 +56,8 @@
      <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\IntoManager.cs" />
+     <Compile Include="Assets\Scripts\Pacman\DirPos.cs" />
+     <Compile Include="Assets\Scripts\Pacman\PacmanMove.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>D:/MainHardDisk/WorkProject/Unity3D/MyGameDemo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
