@@ -15,30 +15,28 @@ public class LoadScene : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(loading());
+        StartCoroutine(Loading());
     }
 
     void Update()
     {
-        Vector2 p = Vector2.MoveTowards(m_pacman.position, m_endPos.position, m_speed);
+        var p = Vector2.MoveTowards(m_pacman.position, m_endPos.position, m_speed);
         m_pacman.position = p;
-        if (Vector2.Distance(m_pacman.position, m_endPos.position) < 0.1f)
+        if (!(Vector2.Distance(m_pacman.position, m_endPos.position) < 0.1f)) return;
+        m_pacman.position = m_startPos.position;
+        foreach (var item in m_eated)
         {
-            m_pacman.position = m_startPos.position;
-            foreach (var item in m_eated)
-            {
-                item.gameObject.SetActive(true);
-            }
-
-            m_loadEnd = true;
+            item.gameObject.SetActive(true);
         }
+
+        m_loadEnd = true;
     }
 
-    private IEnumerator loading()
+    private IEnumerator Loading()
     {
-        string sceneName = PlayerPrefs.GetString("Scene");
+        var sceneName = PlayerPrefs.GetString("Scene");
         print(sceneName);
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
+        var op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
         while (op.progress < 0.9f || !m_loadEnd)
         {

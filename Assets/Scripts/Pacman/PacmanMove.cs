@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 public class PacmanMove : MonoBehaviour {
-    public static int pacmanNormal = 0; //正常
-    public static int pacmanInvincible = 1; //无敌
-    public static int pacmanHurt = 2; //受伤
+    public const int pacmanNormal = 0; //正常
+    public const int pacmanInvincible = 1; //无敌
+    public const int pacmanHurt = 2; //受伤
     /*移动 */
     public static int m_PacmanMoveState = 0; //移动状态
     public static int MOVE_NONE = 0;
@@ -48,5 +49,46 @@ public class PacmanMove : MonoBehaviour {
         if(m_PacmanMoveState==MOVE_UP){
         }
 
+    }
+
+    public void ChangeState(int state)
+    {
+        m_pacmanState = state;
+        switch (state)
+        {
+            case pacmanNormal:
+                GetComponent<SpriteRenderer>().color=Color.white;
+                break;
+            case pacmanInvincible:
+                m_invicibleTimer += m_invicibleTime;
+                GetComponent<SpriteRenderer>().color=Color.red;
+                break;
+            case pacmanHurt:
+                StartCoroutine(Hurt());
+                break;
+        }
+    }
+
+    IEnumerator Hurt()
+    {
+        var color = GetComponent<SpriteRenderer>().color;
+        color.a = 0;
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 1;
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 0;
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 1;
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 0;
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.2f);
+        color.a = 1;
+        GetComponent<SpriteRenderer>().color = color;
+        ChangeState(pacmanNormal);
     }
 }
