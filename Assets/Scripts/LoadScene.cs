@@ -22,6 +22,7 @@ public class LoadScene : MonoBehaviour
     {
         var p = Vector2.MoveTowards(m_pacman.position, m_endPos.position, m_speed);
         m_pacman.position = p;
+        Debug.LogWarning("-----------------");
         if (!(Vector2.Distance(m_pacman.position, m_endPos.position) < 0.1f)) return;
         m_pacman.position = m_startPos.position;
         foreach (var item in m_eated)
