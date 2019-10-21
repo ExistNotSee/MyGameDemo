@@ -75,7 +75,6 @@ public class PacmanMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
 //        if (GameManager.m_paused == true || WinCondiction.m_isWin == true) {
 //            return;
 //        }
