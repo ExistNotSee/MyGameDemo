@@ -1,16 +1,23 @@
+using System;
 using System.Collections;
 using UnityEngine;
-public class PacmanMove : MonoBehaviour {
+
+public class PacmanMove : MonoBehaviour
+{
     public const int pacmanNormal = 0; //正常
     public const int pacmanInvincible = 1; //无敌
+
     public const int pacmanHurt = 2; //受伤
+
     /*移动 */
     public static int m_PacmanMoveState = 0; //移动状态
     public static int MOVE_NONE = 0;
     public static int MOVE_UP = 1;
     public static int MOVE_DOWN = 2;
     public static int MOVE_LEFT = 3;
+
     public static int MOVE_RIGHT = 4;
+
     /*
     角色属性
      */
@@ -24,44 +31,101 @@ public class PacmanMove : MonoBehaviour {
     private float m_invicibleTimer = 0;
     private float m_invicibleFlashTimer = 0;
     Vector2 dest = Vector2.zero;
-    void Start () {
+
+    void Start()
+    {
         dest = transform.position;
         m_pacmanState = pacmanNormal;
     }
-    void Update () {
-        if (m_pacmanState == pacmanInvincible) {
+
+    void Update()
+    {
+        if (m_pacmanState == pacmanInvincible)
+        {
             m_invicibleTimer -= Time.deltaTime;
-            if (m_invicibleTimer <= m_invicibleFlashTime) {
+            if (m_invicibleTimer <= m_invicibleFlashTime)
+            {
                 m_invicibleFlashTimer += Time.deltaTime;
-                if (m_invicibleFlashTimer >= 0.5f) {
-                    if (GetComponent<SpriteRenderer> ().color == Color.red) {
-                        GetComponent<SpriteRenderer> ().color = Color.white;
-                    } else {
-                        GetComponent<SpriteRenderer> ().color = Color.red;
-                    }
+                if (m_invicibleFlashTimer >= 0.5f)
+                {
+                    GetComponent<SpriteRenderer>().color =
+                        GetComponent<SpriteRenderer>().color == Color.red ? Color.white : Color.red;
                     m_invicibleFlashTimer = 0;
                 }
             }
-            if(m_invicibleTimer<=0){
-                m_invicibleTimer = 0;                
+
+            if (m_invicibleTimer <= 0)
+            {
+                m_invicibleTimer = 0;
+                ChangeState(pacmanNormal);
             }
         }
-        if(m_PacmanMoveState==MOVE_UP){
-        }
 
+        if (m_PacmanMoveState == MOVE_UP)
+        {
+            PACMAN_CANMOVE = valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2);
+        } else if (m_PacmanMoveState == MOVE_RIGHT) {
+            PACMAN_CANMOVE = valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2);
+        } else if (m_PacmanMoveState == MOVE_DOWN) {
+            PACMAN_CANMOVE = valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2);
+        } else if (m_PacmanMoveState == MOVE_LEFT) {
+            PACMAN_CANMOVE = valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2);
+        }
     }
 
+    private void FixedUpdate()
+    {
+        
+//        if (GameManager.m_paused == true || WinCondiction.m_isWin == true) {
+//            return;
+//        }
+        var p = Vector2.MoveTowards (transform.position, dest, speed);
+        transform.position = p;
+        if ((Vector2) transform.position == dest) {
+            print ("Move:" + m_PacmanMoveState);
+            if (m_PacmanMoveState == MOVE_UP && valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2))
+                dest = (Vector2) transform.position + Vector2.up;
+            if (m_PacmanMoveState == MOVE_RIGHT && valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2))
+                dest = (Vector2) transform.position + Vector2.right;
+            if (m_PacmanMoveState == MOVE_DOWN && valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2))
+                dest = (Vector2) transform.position - Vector2.up;
+            if (m_PacmanMoveState == MOVE_LEFT && valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2))
+                dest = (Vector2) transform.position - Vector2.right;
+
+            if (Input.GetKey (KeyCode.UpArrow) && valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2))
+                dest = (Vector2) transform.position + Vector2.up;
+            if (Input.GetKey (KeyCode.RightArrow) && valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2))
+                dest = (Vector2) transform.position + Vector2.right;
+            if (Input.GetKey (KeyCode.DownArrow) && valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2))
+                dest = (Vector2) transform.position - Vector2.up;
+            if (Input.GetKey (KeyCode.LeftArrow) && valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2))
+                dest = (Vector2) transform.position - Vector2.right;
+        }
+        var dir = dest - (Vector2) transform.position;
+        GetComponent<Animator> ().SetFloat ("DirX", dir.x);
+        GetComponent<Animator> ().SetFloat ("DirY", dir.y);
+    }
+
+    bool valid(Vector2 dir)
+    {
+        Vector2 pos = transform.position;
+        var hit = Physics2D.Linecast (pos + dir, pos);
+        if (hit.collider == null) {
+            return true;
+        }
+        return hit.collider.gameObject.layer != LayerMask.NameToLayer ("wall") && hit.collider.gameObject.layer != LayerMask.NameToLayer ("Door");
+    }
     public void ChangeState(int state)
     {
         m_pacmanState = state;
         switch (state)
         {
             case pacmanNormal:
-                GetComponent<SpriteRenderer>().color=Color.white;
+                GetComponent<SpriteRenderer>().color = Color.white;
                 break;
             case pacmanInvincible:
                 m_invicibleTimer += m_invicibleTime;
-                GetComponent<SpriteRenderer>().color=Color.red;
+                GetComponent<SpriteRenderer>().color = Color.red;
                 break;
             case pacmanHurt:
                 StartCoroutine(Hurt());
