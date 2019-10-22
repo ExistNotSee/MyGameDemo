@@ -6,7 +6,6 @@ public class PacmanMove : MonoBehaviour
 {
     public const int pacmanNormal = 0; //正常
     public const int pacmanInvincible = 1; //无敌
-
     public const int pacmanHurt = 2; //受伤
 
     /*移动 */
@@ -21,9 +20,9 @@ public class PacmanMove : MonoBehaviour
     /*
     角色属性
      */
-    public static int m_life = 3;
-    public static int m_maxlife = 3;
-    public static bool PACMAN_CANMOVE = true;
+    public static int m_life = 3; //生命
+    public static int m_maxlife = 3; //最大生命
+    public static bool PACMAN_CANMOVE = true; //可以移动
     public const float m_invicibleTime = 5; //无敌时间
     public const float m_invicibleFlashTime = 2.5f; //无敌即将结束闪烁提示时间
     public float speed = 0.4f;
@@ -63,14 +62,26 @@ public class PacmanMove : MonoBehaviour
 
         if (m_PacmanMoveState == MOVE_UP)
         {
-            PACMAN_CANMOVE = valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2);
-        } else if (m_PacmanMoveState == MOVE_RIGHT) {
-            PACMAN_CANMOVE = valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2);
-        } else if (m_PacmanMoveState == MOVE_DOWN) {
-            PACMAN_CANMOVE = valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2);
-        } else if (m_PacmanMoveState == MOVE_LEFT) {
-            PACMAN_CANMOVE = valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2);
+            PACMAN_CANMOVE = valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                             valid((Vector2.up + Vector2.right * 0.3f) * 2);
         }
+        else if (m_PacmanMoveState == MOVE_RIGHT)
+        {
+            PACMAN_CANMOVE = valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                             valid((Vector2.right + Vector2.down * 0.3f) * 2);
+        }
+        else if (m_PacmanMoveState == MOVE_DOWN)
+        {
+            PACMAN_CANMOVE = valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                             valid((Vector2.down + Vector2.right * 0.3f) * 2);
+        }
+        else if (m_PacmanMoveState == MOVE_LEFT)
+        {
+            PACMAN_CANMOVE = valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                             valid((Vector2.left + Vector2.down * 0.3f) * 2);
+        }
+
+        print("CanMove:" + PACMAN_CANMOVE);
     }
 
     private void FixedUpdate()
@@ -78,42 +89,60 @@ public class PacmanMove : MonoBehaviour
 //        if (GameManager.m_paused == true || WinCondiction.m_isWin == true) {
 //            return;
 //        }
-        var p = Vector2.MoveTowards (transform.position, dest, speed);
+        var p = Vector2.MoveTowards(transform.position, dest, speed);
         transform.position = p;
-        if ((Vector2) transform.position == dest) {
-            print ("Move:" + m_PacmanMoveState);
-            if (m_PacmanMoveState == MOVE_UP && valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2))
+        if ((Vector2) transform.position == dest)
+        {
+            print("Move:" + m_PacmanMoveState);
+            if (m_PacmanMoveState == MOVE_UP && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                valid((Vector2.up + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.up;
-            if (m_PacmanMoveState == MOVE_RIGHT && valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2))
+            if (m_PacmanMoveState == MOVE_RIGHT && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                valid((Vector2.right + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.right;
-            if (m_PacmanMoveState == MOVE_DOWN && valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2))
+            if (m_PacmanMoveState == MOVE_DOWN && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                valid((Vector2.down + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.up;
-            if (m_PacmanMoveState == MOVE_LEFT && valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2))
+            if (m_PacmanMoveState == MOVE_LEFT && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                valid((Vector2.left + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.right;
 
-            if (Input.GetKey (KeyCode.UpArrow) && valid ((Vector2.up + Vector2.left * 0.3f) * 2) && valid ((Vector2.up + Vector2.right * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.UpArrow) && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                valid((Vector2.up + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.up;
-            if (Input.GetKey (KeyCode.RightArrow) && valid ((Vector2.right + Vector2.up * 0.3f) * 2) && valid ((Vector2.right + Vector2.down * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.RightArrow) && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                valid((Vector2.right + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.right;
-            if (Input.GetKey (KeyCode.DownArrow) && valid ((Vector2.down + Vector2.left * 0.3f) * 2) && valid ((Vector2.down + Vector2.right * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.DownArrow) && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                valid((Vector2.down + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.up;
-            if (Input.GetKey (KeyCode.LeftArrow) && valid ((Vector2.left + Vector2.up * 0.3f) * 2) && valid ((Vector2.left + Vector2.down * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.LeftArrow) && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                valid((Vector2.left + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.right;
         }
+
         var dir = dest - (Vector2) transform.position;
-        GetComponent<Animator> ().SetFloat ("DirX", dir.x);
-        GetComponent<Animator> ().SetFloat ("DirY", dir.y);
+        GetComponent<Animator>().SetFloat("DirX", dir.x);
+        GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
     bool valid(Vector2 dir)
     {
         Vector2 pos = transform.position;
-        var hit = Physics2D.Linecast (pos + dir, pos);
-        if (hit.collider == null) {
+        var hit = Physics2D.Linecast(pos + dir, pos);
+        if (hit.collider == null)
+        {
             return true;
         }
-        return hit.collider.gameObject.layer != LayerMask.NameToLayer ("wall") && hit.collider.gameObject.layer != LayerMask.NameToLayer ("Door");
+
+        return hit.collider.gameObject.layer != LayerMask.NameToLayer("wall") &&
+               hit.collider.gameObject.layer != LayerMask.NameToLayer("Door");
     }
+
+    /// <summary>
+    /// 改变吃豆人角色的状态 
+    /// </summary>
+    /// <param name="state">目标状态码</param>
     public void ChangeState(int state)
     {
         m_pacmanState = state;
@@ -132,19 +161,44 @@ public class PacmanMove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 无敌模式
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator Invicible()
+    {
+        yield return new WaitForSeconds(5);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        ChangeState(pacmanNormal);
+    }
+
+    /// <summary>
+    /// 受伤mo's'
+    /// </summary>
+    /// <returns></returns>
     IEnumerator Hurt()
     {
+        Debug.LogWarning("-----hurt----1");
         var color = GetComponent<SpriteRenderer>().color;
         color.a = 0;
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.2f);
         color.a = 1;
+        Debug.LogWarning("-----hurt----2");
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.2f);
         color.a = 0;
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.2f);
         color.a = 1;
+        Debug.LogWarning("-----hurt----3");
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.2f);
         color.a = 0;
