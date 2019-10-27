@@ -7,18 +7,14 @@ public class BackgroundMusic : MonoBehaviour {
     public static int m_audioSize;
     // Start is called before the first frame update
     void Start () {
-        GameObject[] bgm = GameObject.FindGameObjectsWithTag ("BackgroundMusic");
+        var bgm = GameObject.FindGameObjectsWithTag ("BackgroundMusic");
         if (bgm.Length > 1) {
             Destroy (gameObject);
         }
         if (bgm.Length == 1) {
             DontDestroyOnLoad (gameObject);
         }
-        if (PlayerPrefs.HasKey ("AudioSize")) {
-            m_audioSize = PlayerPrefs.GetInt ("AudioSize");
-        } else {
-            m_audioSize = 100;
-        }
+        m_audioSize = PlayerPrefs.HasKey ("AudioSize") ? PlayerPrefs.GetInt ("AudioSize") : 100;
         m_audioSource = GetComponent<AudioSource> ();
         m_audioSource.volume = m_audioSize / 100;
     }

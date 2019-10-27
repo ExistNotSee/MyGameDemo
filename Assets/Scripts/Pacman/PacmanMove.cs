@@ -14,7 +14,6 @@ public class PacmanMove : MonoBehaviour
     public static int MOVE_UP = 1;
     public static int MOVE_DOWN = 2;
     public static int MOVE_LEFT = 3;
-
     public static int MOVE_RIGHT = 4;
 
     /*
@@ -86,9 +85,9 @@ public class PacmanMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-//        if (GameManager.m_paused == true || WinCondiction.m_isWin == true) {
-//            return;
-//        }
+        if (GameManager.m_paused || WinCondiction.m_isWin) {
+            return;
+        }
         var p = Vector2.MoveTowards(transform.position, dest, speed);
         transform.position = p;
         if ((Vector2) transform.position == dest)
@@ -180,7 +179,7 @@ public class PacmanMove : MonoBehaviour
     }
 
     /// <summary>
-    /// 受伤mo's'
+    /// 受伤
     /// </summary>
     /// <returns></returns>
     IEnumerator Hurt()

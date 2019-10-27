@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class IntoManager : MonoBehaviour
+public class IntroManager : MonoBehaviour
 {
     public Transform[] m_canvas;
     public int m_currentIndex = 0;
     public Transform m_advanceButton;
     public Transform m_retreateButton;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -32,33 +27,26 @@ public class IntoManager : MonoBehaviour
             m_advanceButton.gameObject.SetActive(true);
         }
     }
-    public void forward()
+    public void Forward()
     {
         m_currentIndex++;
-        showCanvas(m_currentIndex);
+        ShowCanvas(m_currentIndex);
     }
-    public void backward()
+    public void Backward()
     {
         m_currentIndex--;
-        showCanvas(m_currentIndex);
+        ShowCanvas(m_currentIndex);
     }
-    public void goHome()
+    public void GoHome()
     {
         SceneManager.LoadScene("start");
     }
 
-    public void showCanvas(int currentIndex)
+    private void ShowCanvas(int currentIndex)
     {
-        for (int i = 0; i < m_canvas.Length; i++)
+        for (var i = 0; i < m_canvas.Length; i++)
         {
-            if (currentIndex == i)
-            {
-                m_canvas[i].gameObject.SetActive(true);
-            }
-            else
-            {
-                m_canvas[i].gameObject.SetActive(false);
-            }
+            m_canvas[i].gameObject.SetActive(currentIndex == i);
         }
 
     }
