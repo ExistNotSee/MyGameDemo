@@ -60,10 +60,13 @@
     <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\Ghost\Ghost.cs" />
+    <Compile Include="Assets\Scripts\Ghost\GhostLoad.cs" />
     <Compile Include="Assets\Scripts\IntroManager.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\Pacman\DirPos.cs" />
+    <Compile Include="Assets\Scripts\Pacman\PacmanDot.cs" />
     <Compile Include="Assets\Scripts\Pacman\PacmanMove.cs" />
+    <Compile Include="Assets\Scripts\Pacman\SuperDot.cs" />
     <Compile Include="Assets\Scripts\WinCondiction.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/MainHardDisk/WorkProject/Unity3D/MyGameDemo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

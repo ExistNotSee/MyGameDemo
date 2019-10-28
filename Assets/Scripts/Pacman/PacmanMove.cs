@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class PacmanMove : MonoBehaviour
 {
-    public const int pacmanNormal = 0; //正常
-    public const int pacmanInvincible = 1; //无敌
-    public const int pacmanHurt = 2; //受伤
+    public const int PacmanNormal = 0; //正常
+    public const int PacmanInvincible = 1; //无敌
+    public const int PacmanHurt = 2; //受伤
 
     /*移动 */
     public static int m_PacmanMoveState = 0; //移动状态
-    public static int MOVE_NONE = 0;
-    public static int MOVE_UP = 1;
-    public static int MOVE_DOWN = 2;
-    public static int MOVE_LEFT = 3;
-    public static int MOVE_RIGHT = 4;
+    public const int MoveNone = 0;
+    public const int MoveUp = 1;
+    public const int MoveDown = 2;
+    public const int MoveLeft = 3;
+    public const int MoveRight = 4;
 
     /*
     角色属性
@@ -33,12 +33,12 @@ public class PacmanMove : MonoBehaviour
     void Start()
     {
         dest = transform.position;
-        m_pacmanState = pacmanNormal;
+        m_pacmanState = PacmanNormal;
     }
 
     void Update()
     {
-        if (m_pacmanState == pacmanInvincible)
+        if (m_pacmanState == PacmanInvincible)
         {
             m_invicibleTimer -= Time.deltaTime;
             if (m_invicibleTimer <= m_invicibleFlashTime)
@@ -55,26 +55,26 @@ public class PacmanMove : MonoBehaviour
             if (m_invicibleTimer <= 0)
             {
                 m_invicibleTimer = 0;
-                ChangeState(pacmanNormal);
+                ChangeState(PacmanNormal);
             }
         }
 
-        if (m_PacmanMoveState == MOVE_UP)
+        if (m_PacmanMoveState == MoveUp)
         {
             PACMAN_CANMOVE = valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
                              valid((Vector2.up + Vector2.right * 0.3f) * 2);
         }
-        else if (m_PacmanMoveState == MOVE_RIGHT)
+        else if (m_PacmanMoveState == MoveRight)
         {
             PACMAN_CANMOVE = valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
                              valid((Vector2.right + Vector2.down * 0.3f) * 2);
         }
-        else if (m_PacmanMoveState == MOVE_DOWN)
+        else if (m_PacmanMoveState == MoveDown)
         {
             PACMAN_CANMOVE = valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
                              valid((Vector2.down + Vector2.right * 0.3f) * 2);
         }
-        else if (m_PacmanMoveState == MOVE_LEFT)
+        else if (m_PacmanMoveState == MoveLeft)
         {
             PACMAN_CANMOVE = valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
                              valid((Vector2.left + Vector2.down * 0.3f) * 2);
@@ -93,16 +93,16 @@ public class PacmanMove : MonoBehaviour
         if ((Vector2) transform.position == dest)
         {
             print("Move:" + m_PacmanMoveState);
-            if (m_PacmanMoveState == MOVE_UP && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+            if (m_PacmanMoveState == MoveUp && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
                 valid((Vector2.up + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.up;
-            if (m_PacmanMoveState == MOVE_RIGHT && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+            if (m_PacmanMoveState == MoveRight && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
                 valid((Vector2.right + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.right;
-            if (m_PacmanMoveState == MOVE_DOWN && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+            if (m_PacmanMoveState == MoveDown && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
                 valid((Vector2.down + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.up;
-            if (m_PacmanMoveState == MOVE_LEFT && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+            if (m_PacmanMoveState == MoveLeft && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
                 valid((Vector2.left + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.right;
 
@@ -147,14 +147,14 @@ public class PacmanMove : MonoBehaviour
         m_pacmanState = state;
         switch (state)
         {
-            case pacmanNormal:
+            case PacmanNormal:
                 GetComponent<SpriteRenderer>().color = Color.white;
                 break;
-            case pacmanInvincible:
+            case PacmanInvincible:
                 m_invicibleTimer += m_invicibleTime;
                 GetComponent<SpriteRenderer>().color = Color.red;
                 break;
-            case pacmanHurt:
+            case PacmanHurt:
                 StartCoroutine(Hurt());
                 break;
         }
@@ -175,7 +175,7 @@ public class PacmanMove : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(0.5f);
-        ChangeState(pacmanNormal);
+        ChangeState(PacmanNormal);
     }
 
     /// <summary>
@@ -205,6 +205,6 @@ public class PacmanMove : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         color.a = 1;
         GetComponent<SpriteRenderer>().color = color;
-        ChangeState(pacmanNormal);
+        ChangeState(PacmanNormal);
     }
 }

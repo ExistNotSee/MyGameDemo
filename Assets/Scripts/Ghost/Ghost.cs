@@ -9,7 +9,7 @@ public class Ghost : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         var pacmanState = other.transform.GetComponent<PacmanMove>().m_pacmanState;
-        if (pacmanState == PacmanMove.pacmanNormal)
+        if (pacmanState == PacmanMove.PacmanNormal)
         {
             PacmanMove.m_life--;
             if (PacmanMove.m_life <= 0) 
@@ -21,10 +21,10 @@ public class Ghost : MonoBehaviour
             }
             else
             {
-                other.GetComponent<PacmanMove>().ChangeState(PacmanMove.pacmanHurt);
+                other.GetComponent<PacmanMove>().ChangeState(PacmanMove.PacmanHurt);
             }
         }
-        else if (pacmanState == PacmanMove.pacmanInvincible)
+        else if (pacmanState == PacmanMove.PacmanInvincible)
         {
             GameManager.gameManager.addScore(100);
             GameManager.gameManager.ghostRevenge(gameObject);
