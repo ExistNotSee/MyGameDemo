@@ -85,9 +85,11 @@ public class PacmanMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.m_paused || WinCondiction.m_isWin) {
+        if (GameManager.m_paused || WinCondiction.m_isWin)
+        {
             return;
         }
+
         var p = Vector2.MoveTowards(transform.position, dest, speed);
         transform.position = p;
         if ((Vector2) transform.position == dest)
@@ -153,8 +155,9 @@ public class PacmanMove : MonoBehaviour
             case PacmanInvincible:
                 m_invicibleTimer += m_invicibleTime;
                 GetComponent<SpriteRenderer>().color = Color.red;
+                StartCoroutine(Invicible());
                 break;
-            case PacmanHurt:
+            default:
                 StartCoroutine(Hurt());
                 break;
         }
