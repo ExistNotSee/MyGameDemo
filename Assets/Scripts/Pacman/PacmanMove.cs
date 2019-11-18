@@ -59,25 +59,24 @@ public class PacmanMove : MonoBehaviour
             }
         }
 
-        if (m_PacmanMoveState == MoveUp)
+        switch (m_PacmanMoveState)
         {
-            PACMAN_CANMOVE = valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
-                             valid((Vector2.up + Vector2.right * 0.3f) * 2);
-        }
-        else if (m_PacmanMoveState == MoveRight)
-        {
-            PACMAN_CANMOVE = valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
-                             valid((Vector2.right + Vector2.down * 0.3f) * 2);
-        }
-        else if (m_PacmanMoveState == MoveDown)
-        {
-            PACMAN_CANMOVE = valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
-                             valid((Vector2.down + Vector2.right * 0.3f) * 2);
-        }
-        else if (m_PacmanMoveState == MoveLeft)
-        {
-            PACMAN_CANMOVE = valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
-                             valid((Vector2.left + Vector2.down * 0.3f) * 2);
+            case MoveUp:
+                PACMAN_CANMOVE = valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                                 valid((Vector2.up + Vector2.right * 0.3f) * 2);
+                break;
+            case MoveRight:
+                PACMAN_CANMOVE = valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                                 valid((Vector2.right + Vector2.down * 0.3f) * 2);
+                break;
+            case MoveDown:
+                PACMAN_CANMOVE = valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                                 valid((Vector2.down + Vector2.right * 0.3f) * 2);
+                break;
+            case MoveLeft:
+                PACMAN_CANMOVE = valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                                 valid((Vector2.left + Vector2.down * 0.3f) * 2);
+                break;
         }
 
         print("CanMove:" + PACMAN_CANMOVE);
