@@ -15,6 +15,8 @@ public class PacmanMove : MonoBehaviour
     public const int MoveDown = 2;
     public const int MoveLeft = 3;
     public const int MoveRight = 4;
+    public int m_pacmanState = 0;
+    public float speed = 0.4f;
 
     /*
     角色属性
@@ -24,11 +26,10 @@ public class PacmanMove : MonoBehaviour
     public static bool PACMAN_CANMOVE = true; //可以移动
     public const float m_invicibleTime = 5; //无敌时间
     public const float m_invicibleFlashTime = 2.5f; //无敌即将结束闪烁提示时间
-    public float speed = 0.4f;
-    public int m_pacmanState = 0;
-    private float m_invicibleTimer = 0;
-    private float m_invicibleFlashTimer = 0;
-    Vector2 dest = Vector2.zero;
+
+    private float m_invicibleTimer = 0; //无敌计时
+    private float m_invicibleFlashTimer = 0; //无敌动画计时
+    Vector2 dest = Vector2.zero; //角色坐标
 
     void Start()
     {
@@ -79,18 +80,16 @@ public class PacmanMove : MonoBehaviour
                 break;
         }
 
-        print("CanMove:" + PACMAN_CANMOVE);
+//        print("CanMove:" + PACMAN_CANMOVE);
     }
 
     private void FixedUpdate()
     {
-        if (GameManager.m_paused || WinCondiction.m_isWin)
-        {
-            return;
-        }
+        if (GameManager.m_paused || WinCondiction.m_isWin) return;
 
         var p = Vector2.MoveTowards(transform.position, dest, speed);
         transform.position = p;
+
         if ((Vector2) transform.position == dest)
         {
             print("Move:" + m_PacmanMoveState);
@@ -126,14 +125,16 @@ public class PacmanMove : MonoBehaviour
         GetComponent<Animator>().SetFloat("DirY", dir.y);
     }
 
+    /// <summary>
+    /// 检查目标点的有效性
+    /// </summary>
+    /// <param name="dir">增加的距离</param>
+    /// <returns>true有效</returns>
     bool valid(Vector2 dir)
     {
         Vector2 pos = transform.position;
         var hit = Physics2D.Linecast(pos + dir, pos);
-        if (hit.collider == null)
-        {
-            return true;
-        }
+        if (hit.collider == null) return true;
 
         return hit.collider.gameObject.layer != LayerMask.NameToLayer("wall") &&
                hit.collider.gameObject.layer != LayerMask.NameToLayer("Door");
