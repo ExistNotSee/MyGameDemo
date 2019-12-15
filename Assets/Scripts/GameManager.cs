@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
         m_lifeText.text = "X " + PacmanMove.m_life;
     }
 
-    void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene("ChooseLevel");
         PacmanMove.m_life = PacmanMove.m_maxlife;
