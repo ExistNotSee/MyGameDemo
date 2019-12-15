@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BackgroundMusic
   - Dot
+  - WayPoint
+  - Restart
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - 
   - 
   - Player
-  - 
-  - 
+  - Wall
+  - Door
   - 
   - 
   - 

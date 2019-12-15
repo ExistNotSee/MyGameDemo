@@ -63,20 +63,20 @@ public class PacmanMove : MonoBehaviour
         switch (m_PacmanMoveState)
         {
             case MoveUp:
-                PACMAN_CANMOVE = valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
-                                 valid((Vector2.up + Vector2.right * 0.3f) * 2);
+                PACMAN_CANMOVE = Valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                                 Valid((Vector2.up + Vector2.right * 0.3f) * 2);
                 break;
             case MoveRight:
-                PACMAN_CANMOVE = valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
-                                 valid((Vector2.right + Vector2.down * 0.3f) * 2);
+                PACMAN_CANMOVE = Valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                                 Valid((Vector2.right + Vector2.down * 0.3f) * 2);
                 break;
             case MoveDown:
-                PACMAN_CANMOVE = valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
-                                 valid((Vector2.down + Vector2.right * 0.3f) * 2);
+                PACMAN_CANMOVE = Valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                                 Valid((Vector2.down + Vector2.right * 0.3f) * 2);
                 break;
             case MoveLeft:
-                PACMAN_CANMOVE = valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
-                                 valid((Vector2.left + Vector2.down * 0.3f) * 2);
+                PACMAN_CANMOVE = Valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                                 Valid((Vector2.left + Vector2.down * 0.3f) * 2);
                 break;
         }
 
@@ -92,51 +92,58 @@ public class PacmanMove : MonoBehaviour
 
         if ((Vector2) transform.position == dest)
         {
-            print("Move:" + m_PacmanMoveState);
-            if (m_PacmanMoveState == MoveUp && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
-                valid((Vector2.up + Vector2.right * 0.3f) * 2))
+//            print("Move:" + m_PacmanMoveState);
+            //使用虚拟摇杆时运算
+            if (m_PacmanMoveState == MoveUp && Valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                Valid((Vector2.up + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.up;
-            if (m_PacmanMoveState == MoveRight && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
-                valid((Vector2.right + Vector2.down * 0.3f) * 2))
+            if (m_PacmanMoveState == MoveRight && Valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                Valid((Vector2.right + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.right;
-            if (m_PacmanMoveState == MoveDown && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
-                valid((Vector2.down + Vector2.right * 0.3f) * 2))
+            if (m_PacmanMoveState == MoveDown && Valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                Valid((Vector2.down + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.up;
-            if (m_PacmanMoveState == MoveLeft && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
-                valid((Vector2.left + Vector2.down * 0.3f) * 2))
+            if (m_PacmanMoveState == MoveLeft && Valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                Valid((Vector2.left + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.right;
 
-            if (Input.GetKey(KeyCode.UpArrow) && valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
-                valid((Vector2.up + Vector2.right * 0.3f) * 2))
+            //使用键盘按键时运算
+            if (Input.GetKey(KeyCode.UpArrow) && Valid((Vector2.up + Vector2.left * 0.3f) * 2) &&
+                Valid((Vector2.up + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.up;
-            if (Input.GetKey(KeyCode.RightArrow) && valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
-                valid((Vector2.right + Vector2.down * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.RightArrow) && Valid((Vector2.right + Vector2.up * 0.3f) * 2) &&
+                Valid((Vector2.right + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position + Vector2.right;
-            if (Input.GetKey(KeyCode.DownArrow) && valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
-                valid((Vector2.down + Vector2.right * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.DownArrow) && Valid((Vector2.down + Vector2.left * 0.3f) * 2) &&
+                Valid((Vector2.down + Vector2.right * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.up;
-            if (Input.GetKey(KeyCode.LeftArrow) && valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
-                valid((Vector2.left + Vector2.down * 0.3f) * 2))
+            if (Input.GetKey(KeyCode.LeftArrow) && Valid((Vector2.left + Vector2.up * 0.3f) * 2) &&
+                Valid((Vector2.left + Vector2.down * 0.3f) * 2))
                 dest = (Vector2) transform.position - Vector2.right;
         }
 
+        /*
+         * 根据移动方向剩余的距离dir中x、y确定动画的播放
+         */
         var dir = dest - (Vector2) transform.position;
-        GetComponent<Animator>().SetFloat("DirX", dir.x);
-        GetComponent<Animator>().SetFloat("DirY", dir.y);
+        //得到动画组件
+        var animator = GetComponent<Animator>();
+        animator.SetFloat("DirX", dir.x);
+        animator.SetFloat("DirY", dir.y);
     }
 
     /// <summary>
-    /// 检查目标点的有效性
+    /// 碰撞检测，检查目标点的有效性
     /// </summary>
     /// <param name="dir">增加的距离</param>
     /// <returns>true有效</returns>
-    bool valid(Vector2 dir)
+    private bool Valid(Vector2 dir)
     {
         Vector2 pos = transform.position;
         var hit = Physics2D.Linecast(pos + dir, pos);
         if (hit.collider == null) return true;
 
-        return hit.collider.gameObject.layer != LayerMask.NameToLayer("wall") &&
+        return hit.collider.gameObject.layer != LayerMask.NameToLayer("Wall") &&
                hit.collider.gameObject.layer != LayerMask.NameToLayer("Door");
     }
 
