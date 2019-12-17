@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 
 public class SuperDot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public PacmanMove _pacmanMove;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (string.Compare(other.tag, "Player", StringComparison.Ordinal) != 0) return;
+        GameManager.gameManager.addScore(10);
+        _pacmanMove.ChangeState(PacmanMove.PacmanInvincible);
+        Destroy(gameObject);
     }
 }

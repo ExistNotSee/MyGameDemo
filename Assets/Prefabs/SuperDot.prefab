@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4815265309396474139}
   - component: {fileID: 7367370659923790217}
   - component: {fileID: 5587110504674238187}
-  - component: {fileID: 6160151216850216000}
+  - component: {fileID: 8225706865555011986}
   m_Layer: 0
   m_Name: SuperDot
-  m_TagString: Untagged
+  m_TagString: Dot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,9 +26,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4605971039689841671}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 12.8125
---- !u!114 &6160151216850216000
+--- !u!114 &8225706865555011986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,3 +109,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f277396d8563314fb2c295c61bcbf30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pacmanMove: {fileID: 0}

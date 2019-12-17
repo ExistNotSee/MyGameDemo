@@ -170,7 +170,7 @@ public class GameManager : MonoBehaviour
         if (m_muted == false) //静音
         {
             m_muteButton.GetComponent<Image>().sprite = m_audioStartSprite;
-            var sound = GameObject.Find("Sound").GetComponent<AudioSource>();
+            var sound = GameObject.Find("Audio Source").GetComponent<AudioSource>();
             if (sound != null)
             {
                 sound.mute = true;
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
         else //放音
         {
             m_muteButton.GetComponent<Image>().sprite = m_muteSprite;
-            var sound = GameObject.Find("Sound").GetComponent<AudioSource>();
+            var sound = GameObject.Find("Audio Source").GetComponent<AudioSource>();
             if (sound != null)
             {
                 sound.mute = false;
