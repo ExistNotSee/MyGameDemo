@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Pacman\PacmanDot.cs" />
     <Compile Include="Assets\Scripts\Pacman\PacmanMove.cs" />
     <Compile Include="Assets\Scripts\Pacman\SuperDot.cs" />
+    <Compile Include="Assets\Scripts\WayPoint.cs" />
     <Compile Include="Assets\Scripts\WinCondiction.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/MainHardDisk/WorkProject/Unity3D/MyGameDemo/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
