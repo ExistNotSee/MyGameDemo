@@ -59,8 +59,15 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\BackgroundMusic.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Ghost\ClydeTrack.cs" />
     <Compile Include="Assets\Scripts\Ghost\Ghost.cs" />
     <Compile Include="Assets\Scripts\Ghost\GhostLoad.cs" />
+    <Compile Include="Assets\Scripts\Ghost\GhostMove.cs" />
+    <Compile Include="Assets\Scripts\Ghost\GhostNavi.cs" />
+    <Compile Include="Assets\Scripts\Ghost\GhostOut.cs" />
+    <Compile Include="Assets\Scripts\Ghost\GhostTrack.cs" />
+    <Compile Include="Assets\Scripts\Ghost\InkyTrackPoint.cs" />
+    <Compile Include="Assets\Scripts\Ghost\PinkyTarget.cs" />
     <Compile Include="Assets\Scripts\IntroManager.cs" />
     <Compile Include="Assets\Scripts\LoadScene.cs" />
     <Compile Include="Assets\Scripts\Pacman\DirPos.cs" />
