@@ -1,52 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class IntroManager : MonoBehaviour
 {
-    public Transform[] m_canvas;
-    public int m_currentIndex = 0;
-    public Transform m_advanceButton;
-    public Transform m_retreateButton;
+    public Transform[] canvas;
+    public int currentIndex;
+    public Transform advanceButton;
+    public Transform retreatButton;
 
     // Update is called once per frame
     void Update()
     {
-        if (m_currentIndex == 0)
+        if (currentIndex == 0)
         {
-            m_retreateButton.gameObject.SetActive(false);
+            retreatButton.gameObject.SetActive(false);
         }
-        else if (m_currentIndex == m_canvas.Length - 1)
+        else if (currentIndex == canvas.Length - 1)
         {
-            m_advanceButton.gameObject.SetActive(false);
+            advanceButton.gameObject.SetActive(false);
         }
         else
         {
-            m_retreateButton.gameObject.SetActive(true);
-            m_advanceButton.gameObject.SetActive(true);
+            retreatButton.gameObject.SetActive(true);
+            advanceButton.gameObject.SetActive(true);
         }
     }
     public void Forward()
     {
-        m_currentIndex++;
-        ShowCanvas(m_currentIndex);
+        currentIndex++;
+        ShowCanvas();
     }
     public void Backward()
     {
-        m_currentIndex--;
-        ShowCanvas(m_currentIndex);
+        currentIndex--;
+        ShowCanvas();
     }
     public void GoHome()
     {
         SceneManager.LoadScene("start");
     }
 
-    private void ShowCanvas(int currentIndex)
+    private void ShowCanvas()
     {
-        for (var i = 0; i < m_canvas.Length; i++)
+        for (var i = 0; i < canvas.Length; i++)
         {
-            m_canvas[i].gameObject.SetActive(currentIndex == i);
+            canvas[i].gameObject.SetActive(currentIndex == i);
         }
 
     }

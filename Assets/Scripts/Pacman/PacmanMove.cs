@@ -143,8 +143,8 @@ public class PacmanMove : MonoBehaviour
         var hit = Physics2D.Linecast(pos + dir, pos);
         if (hit.collider == null) return true;
 
-        return hit.collider.gameObject.layer != LayerMask.NameToLayer("Wall") &&
-               hit.collider.gameObject.layer != LayerMask.NameToLayer("Door");
+        return hit.collider.gameObject.layer != LayerMask.NameToLayer("Wall");
+//               && hit.collider.gameObject.layer != LayerMask.NameToLayer("Door");
     }
 
     /// <summary>
