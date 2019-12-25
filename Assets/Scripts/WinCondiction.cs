@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class WinCondiction
+public class WinCondiction : MonoBehaviour
 {
     public static bool m_isWin;
     public static WinCondiction Instant;
 
     public GameObject m_winCanvas;
-    public Transform m_SoundTransform;
+    public Transform m_soundTransform;
     public AudioClip m_winAudio;
     public AudioClip m_deathAudio;
     private bool m_winAudioPlayed = false;
@@ -36,14 +36,16 @@ public class WinCondiction
 
         m_winCanvas.SetActive(true);
         if (m_winAudioPlayed != false) return;
-        var audio = m_SoundTransform.GetComponent<AudioSource>();
+        var audio = m_soundTransform.GetComponent<AudioSource>();
         audio.PlayOneShot(m_winAudio);
         m_winAudioPlayed = true;
     }
 
-    public void Death()
+    /// <summary>
+    /// 播放游戏结束时的音频
+    /// </summary>
+    public void DeathAudio()
     {
-        var audio = m_SoundTransform.GetComponent<AudioSource>();
-        audio.PlayOneShot(m_deathAudio);
+        m_soundTransform.GetComponent<AudioSource>().PlayOneShot(m_deathAudio);
     }
 }

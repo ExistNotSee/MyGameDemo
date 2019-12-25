@@ -16,6 +16,7 @@ public class InkyTrackPoint : MonoBehaviour
     void Update()
     {
         if (pacman == null) return;
+        
         if (blinky == null)
         {
             track.target = pacman;

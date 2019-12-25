@@ -3,7 +3,7 @@
 public class GhostTrack : Ghost
 {
     public Transform wayPoint;
-    public Transform target;
+    public Transform target;//幽灵的目标
     public float speed;
     public PacmanMove pacman;
     private Transform frontPoint; //避免死循环移动，不走回头路

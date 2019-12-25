@@ -217,4 +217,11 @@ public class PacmanMove : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
         ChangeState(PacmanNormal);
     }
+
+    public enum PacmanStatus
+    {
+        PacmanNormal,//正常
+        PacmanInvincible,//无敌
+        PacmanHurt//受伤
+    }
 }

@@ -5,7 +5,7 @@ public class ClydeTrack : MonoBehaviour
 {
     public Transform pacman;
     public List<Transform> corners;
-    private GhostTrack ghostTrack;
+    private GhostTrack ghostTrack;//幽灵的移动路径
     private bool caculateCorner;
 
     void Start()

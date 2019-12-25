@@ -16,7 +16,7 @@ public class Ghost : MonoBehaviour
             
             //生命为空是结束游戏
             GameManager.gameManager.SaveHighScore();
-            WinCondiction.Instant.Death();
+            WinCondiction.Instant.DeathAudio();
             restartGameObject.SetActive(true);
             Destroy(other.gameObject);
         }
