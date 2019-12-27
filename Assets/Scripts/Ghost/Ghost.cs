@@ -14,9 +14,9 @@ public class Ghost : MonoBehaviour
             PacmanMove.m_life--;
             if (PacmanMove.m_life > 0) return;
             
-            //生命为空是结束游戏
+            //生命为空时结束游戏
             GameManager.gameManager.SaveHighScore();
-            WinCondiction.Instant.DeathAudio();
+            WinCondiction.Instant.GameOverAudio(false);
             restartGameObject.SetActive(true);
             Destroy(other.gameObject);
         }

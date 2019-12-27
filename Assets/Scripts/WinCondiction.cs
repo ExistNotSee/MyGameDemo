@@ -35,17 +35,16 @@ public class WinCondiction : MonoBehaviour
         }
 
         m_winCanvas.SetActive(true);
-        if (m_winAudioPlayed != false) return;
-        var audio = m_soundTransform.GetComponent<AudioSource>();
-        audio.PlayOneShot(m_winAudio);
-        m_winAudioPlayed = true;
+        if (m_winAudioPlayed) return;
+        GameOverAudio(true);
     }
 
     /// <summary>
     /// 播放游戏结束时的音频
     /// </summary>
-    public void DeathAudio()
+    public void GameOverAudio(bool isWin)
     {
-        m_soundTransform.GetComponent<AudioSource>().PlayOneShot(m_deathAudio);
+        m_winAudioPlayed = isWin;
+        m_soundTransform.GetComponent<AudioSource>().PlayOneShot(isWin ? m_winAudio : m_deathAudio);
     }
 }
