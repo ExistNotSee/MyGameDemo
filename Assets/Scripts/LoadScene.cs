@@ -6,12 +6,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-    public Transform m_pacman;
-    public Transform m_startPos;
-    public Transform m_endPos;
-    public List<Transform> m_eated;
-    public float m_speed = 0.1f;
-    public bool m_loadEnd = false;
+    public Transform pacman;
+    public Transform startPos;
+    public Transform endPos;
+    public List<Transform> eated;
+    public float speed = 0.1f;
+    private bool loadEnd;
 
     void Start()
     {
@@ -56,21 +56,21 @@ public class LoadScene : MonoBehaviour
 //        // 返回最大长度的向量
 //        print(Vector2.Max(a, b));
 //        print(Vector2.Min(a, b));
-//        StartCoroutine(Loading());
+        StartCoroutine(Loading());
     }
 
     void Update()
     {
-        var p = Vector2.MoveTowards(m_pacman.position, m_endPos.position, m_speed);
-        m_pacman.position = p;
-        if (Vector2.Distance(m_pacman.position, m_endPos.position) >= 0.1f) return;
-        m_pacman.position = m_startPos.position;
-        foreach (var item in m_eated)
+        var p = Vector2.MoveTowards(pacman.position, endPos.position, speed);
+        pacman.position = p;
+        if (Vector2.Distance(pacman.position, endPos.position) >= 0.1f) return;
+        pacman.position = startPos.position;
+        foreach (var item in eated)
         {
             item.gameObject.SetActive(true);
         }
 
-        m_loadEnd = true;
+        loadEnd = true;
     }
 
     private IEnumerator Loading()
@@ -79,7 +79,7 @@ public class LoadScene : MonoBehaviour
         print("sceneName:"+sceneName);
         var op = SceneManager.LoadSceneAsync("01");
         op.allowSceneActivation = false;
-        while (op.progress < 0.9f || !m_loadEnd)
+        while (op.progress < 0.9f || !loadEnd)
         {
             yield return new WaitForEndOfFrame();
         }

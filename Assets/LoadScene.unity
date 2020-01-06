@@ -208,19 +208,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f825e67a5c9641e29e5e6159cd977b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_pacman: {fileID: 1212611827}
-  m_startPos: {fileID: 372478601}
-  m_endPos: {fileID: 499758361}
-  m_eated:
+  pacman: {fileID: 1212611827}
+  startPos: {fileID: 372478601}
+  endPos: {fileID: 499758361}
+  eated:
   - {fileID: 1766332018}
-  - {fileID: 1964008922}
-  - {fileID: 1491709861}
   - {fileID: 113397633}
+  - {fileID: 1491709861}
+  - {fileID: 1964008922}
   - {fileID: 2111599981}
   - {fileID: 2044243544}
   - {fileID: 2073640841}
-  m_speed: 0.2
-  m_loadEnd: 0
+  speed: 0.2
+  loadEnd: 0
 --- !u!124 &93879223
 Behaviour:
   m_ObjectHideFlags: 0
