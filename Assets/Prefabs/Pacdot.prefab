@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7222251143575100887}
   - component: {fileID: 4213788853709181095}
-  - component: {fileID: 2084445491642453150}
   - component: {fileID: 8381124917789509848}
+  - component: {fileID: 2073640838}
   m_Layer: 0
   m_Name: Pacdot
   m_TagString: Dot
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5414059607537120283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 2}
+  m_LocalScale: {x: 1.11, y: 1.11, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -81,18 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2084445491642453150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5414059607537120283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151737bb000c8d3459410f705964f988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &8381124917789509848
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,3 +107,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &2073640838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414059607537120283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c58df9271781b04c9ddb39be6843160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

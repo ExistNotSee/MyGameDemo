@@ -76,8 +76,8 @@ public class LoadScene : MonoBehaviour
     private IEnumerator Loading()
     {
         var sceneName = PlayerPrefs.GetString("Scene");
-        print("sceneName:"+sceneName);
-        var op = SceneManager.LoadSceneAsync("01");
+        print("sceneName:" + sceneName);
+        var op = SceneManager.LoadSceneAsync("Level 01");
         op.allowSceneActivation = false;
         while (op.progress < 0.9f || !loadEnd)
         {

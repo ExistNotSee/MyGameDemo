@@ -705,7 +705,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 250141057}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2054005621}
+        m_MethodName: quitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &250141057
@@ -974,7 +985,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 451796427}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2054005621}
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &451796427
@@ -2728,7 +2750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_eatedDot: 0
   m_scoreText: {fileID: 0}
-  m_hightSocreText: {fileID: 0}
+  m_hightScoreText: {fileID: 0}
   m_lifeText: {fileID: 0}
   m_pauseButton: {fileID: 0}
   m_startSprite: {fileID: 0}
