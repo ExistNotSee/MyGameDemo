@@ -3,7 +3,7 @@
 public class GhostTrack : Ghost
 {
     public Transform wayPoint;
-    public Transform target;//幽灵的目标
+    public Transform target; //幽灵的目标
     public float speed;
     public PacmanMove pacman;
     private Transform frontPoint; //避免死循环移动，不走回头路
@@ -35,16 +35,17 @@ public class GhostTrack : Ghost
 
     private void ChangeWayPoint()
     {
-        if (pacman.m_pacmanState == PacmanMove.PacmanNormal || pacman.m_pacmanState == PacmanMove.PacmanHurt
-        ) //吃豆人正常状态或受伤状态下，接近吃豆人
+        if (pacman.m_pacmanState == PacmanMove.PacmanNormal || pacman.m_pacmanState == PacmanMove.PacmanHurt)
         {
+            //吃豆人正常状态或受伤状态下，接近吃豆人
             var nextWay = wayPoint; //下一个路点，设为上一路点仅是为了避免报空值错误
             var distance = float.MaxValue; //初始距离设为最大值
             var nextWays = wayPoint.GetComponent<WayPoint>();
             foreach (var wayPoint in nextWays.nextPoint) //遍历该路点临近所有路点，找出与目标点最近的路点，设置为新路点
             {
                 if (!(Vector2.Distance(wayPoint.position, target.position) < distance) ||
-                    wayPoint == frontPoint) continue; //不走回头路
+                    wayPoint == frontPoint) continue;
+                //不走回头路
                 distance = Vector2.Distance(wayPoint.position, target.position);
                 nextWay = wayPoint;
             }
